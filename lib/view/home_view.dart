@@ -16,6 +16,18 @@ class HomeView extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
+              if (Get.isDarkMode) {
+                Get.changeTheme(ThemeData.light());
+              } else {
+                Get.changeTheme(ThemeData.dark());
+              }
+            },
+            icon: Icon(
+              Get.isDarkMode ? Icons.dark_mode_sharp : Icons.dark_mode_outlined,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
               sharedPreferences!.clear();
               Get.offAllNamed('/login');
             },
@@ -34,6 +46,20 @@ class HomeView extends StatelessWidget {
           ElevatedButton(
             onPressed: () => Get.to(() => SecondScreen()),
             child: const Text('Second Screen'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.defaultDialog(
+                  title: 'Test',
+                  middleText: 'Are you sure ?',
+                  textConfirm: 'Confirm',
+                  textCancel: 'Cancel');
+            },
+            child: const Text('Show Dialog'),
+          ),
+          ElevatedButton(
+            onPressed: () => Get.snackbar('Hi', 'How Are You?'),
+            child: const Text('Show SnackBar'),
           ),
         ],
       ),

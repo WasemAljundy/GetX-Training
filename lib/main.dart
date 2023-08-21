@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'GetX Usage',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
+        primarySwatch: Colors.cyan,
       ),
       initialRoute: '/login',
       getPages: [
