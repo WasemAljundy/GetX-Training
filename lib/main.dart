@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_course/middleware/auth_middleware.dart';
 import 'package:getx_course/utils/binding_injections.dart';
 import 'package:getx_course/view/first_screen.dart';
 import 'package:getx_course/view/home_view.dart';
+import 'package:getx_course/view/login_view.dart';
 import 'package:getx_course/view/second_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+SharedPreferences? sharedPreferences;
+
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  sharedPreferences = await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 
@@ -20,9 +28,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
-      // home: const HomeView(),
-      initialRoute: '/home',
+      initialRoute: '/login',
       getPages: [
+        GetPage(
+          name: '/login',
+          page: () => const LoginView(),
+          middlewares: [AuthMiddleWare()],
+        ),
         GetPage(
           name: '/home',
           page: () => const HomeView(),
